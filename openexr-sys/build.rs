@@ -10,7 +10,7 @@ fn main() {
         let mut include_paths = Vec::new();
 
         let suffix = if let Ok(v) = env::var("OPENEXR_LIB_SUFFIX") {
-            format!("-{}", v)
+            format!("{}", v)
         } else {
             "".into()
         };
@@ -45,7 +45,7 @@ fn main() {
             println!("cargo:rustc-link-lib=static=Iex{}", suffix);
             println!("cargo:rustc-link-lib=static=Imath{}", suffix);
             println!("cargo:rustc-link-lib=static=IlmThread{}", suffix);
-            println!("cargo:rustc-link-lib=static=Half");
+            println!("cargo:rustc-link-lib=static=Half{}", suffix);
             include_paths.push(PathBuf::from(&format!("{}/include/OpenEXR", path)));
         } else {
             let paths = pkg_config::Config::new()
